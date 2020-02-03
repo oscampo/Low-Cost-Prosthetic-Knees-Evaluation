@@ -4,11 +4,9 @@ c3d = ezc3dRead();
 c3d = ezc3dRead(file);
 frames = c3d.header.points.lastFrame-c3d.header.points.firstFrame+1;
 markers = c3d.header.points.size;
-event.labels = c3d.parameters.EVENT.LABELS.DATA;
-event.context = c3d.parameters.EVENT.CONTEXTS.DATA;
+event.labels = c3d.parameters.EVENT.LABELS.DATA';
 event.times = c3d.parameters.EVENT.TIMES.DATA(2,:);
 event.frames = fix(event.times*120-c3d.header.points.firstFrame);
-
 for i=1:markers
     label=strrep(c3d.parameters.POINT.LABELS.DATA{i},' ','');
     datos.(label)=reshape(c3d.data.points(:,i,:),3, frames)';
