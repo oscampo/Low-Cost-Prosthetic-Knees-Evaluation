@@ -9,39 +9,56 @@ event.context = c3d.parameters.EVENT.CONTEXTS.DATA;
 event.times = c3d.parameters.EVENT.TIMES.DATA(2,:);
 event.frames = fix(event.times*120-c3d.header.points.firstFrame);
 
+prompt = 'Pierna amputada (L/R)? ';
+Leg = input(prompt);
+Leg = upper(Leg);
+evento = [];
+j = 1;
+for i = 1:size(event.frames,2)
+    q = cell2mat(event.context(i));
+    if q(1) == Leg
+        ev(j) = event.frames(i);
+        j = j+1;
+    else
+        0;
+    end
+end
+
+
 for i=1:markers
     label=strrep(c3d.parameters.POINT.LABELS.DATA{i},' ','');
     datos.(label)=reshape(c3d.data.points(:,i,:),3, frames)';
 end
 
-vertR=datos.RASI;
-vertR(:,3)=vertR(:,3)+1;
-vertI=datos.LASI;
-vertI(:,3)=vertI(:,3)+1;
 
-
-TetaTorsoR=atan2d(vertR(:,3)-datos.RASI(:,3), vertR(:,2)-datos.RASI(:,2));
-TetaMusloR=atan2d((datos.RASI(:,3)-datos.RKNE(:,3)),(datos.RASI(:,2)-datos.RKNE(:,2)));
-TetaPiernaR=atan2d((datos.RKNE(:,3)-datos.RANK(:,3)),(datos.RKNE(:,2)-datos.RANK(:,2)));
-TetaPieR=atand((datos.RANK(:,3)-datos.RTOE(:,3))./(datos.RANK(:,2)-datos.RTOE(:,2)));
-
-TetaTorsoI=atan2d(vertI(:,3)-datos.LASI(:,3), vertI(:,2)-datos.LASI(:,2));
-TetaMusloI=atan2d((datos.LASI(:,3)-datos.LKNE(:,3)),(datos.LASI(:,2)-datos.LKNE(:,2)));
-TetaPiernaI=atan2d((datos.LKNE(:,3)-datos.LANK(:,3)),(datos.LKNE(:,2)-datos.LANK(:,2)));
-TetaPieI=atand((datos.LANK(:,3)-datos.LTOE(:,3))./(datos.LANK(:,2)-datos.LTOE(:,2)));
-
-TetaCaderaR=TetaTorsoR-TetaMusloR;
-TetaRodillaR=TetaMusloR-TetaPiernaR;
-TetaTobilloR=TetaPiernaR-TetaPieR;
-
-TetaCaderaI=TetaTorsoI-TetaMusloI;
-TetaRodillaI=TetaMusloI-TetaPiernaI;
-TetaTobilloI=TetaPiernaI-TetaPieI;
-
+if Leg == 'R'
+    
+    vertR=datos.RASI;
+    vertR(ev(1):ev(2),3)=vertR(ev(1):ev(2),3)+1;    
+    TetaTorsoR=atan2d(vertR(ev(1):ev(2),3)-datos.RASI(ev(1):ev(2),3), vertR(ev(1):ev(2),2)-datos.RASI(ev(1):ev(2),2));
+    TetaMusloR=atan2d((datos.RASI(ev(1):ev(2),3)-datos.RKNE(ev(1):ev(2),3)),(datos.RASI(ev(1):ev(2),2)-datos.RKNE(ev(1):ev(2),2)));
+    TetaPiernaR=atan2d((datos.RKNE(ev(1):ev(2),3)-datos.RANK(ev(1):ev(2),3)),(datos.RKNE(ev(1):ev(2),2)-datos.RANK(ev(1):ev(2),2)));
+    TetaPieR=atand((datos.RANK(ev(1):ev(2),3)-datos.RTOE(ev(1):ev(2),3))./(datos.RANK(ev(1):ev(2),2)-datos.RTOE(ev(1):ev(2),2)));
+    
+    TetaCadera=TetaTorsoR-TetaMusloR;
+    TetaRodilla=TetaMusloR-TetaPiernaR;
+    TetaTobillo=TetaPiernaR-TetaPieR;
+elseif Leg == 'L'
+    vertI=datos.LASI;
+    vertI(ev(1):ev(2),3)=vertI(ev(1):ev(2),3)+1;
+    TetaTorsoI=atan2d(vertI(ev(1):ev(2),3)-datos.LASI(ev(1):ev(2),3), vertI(ev(1):ev(2),2)-datos.LASI(ev(1):ev(2),2));
+    TetaMusloI=atan2d((datos.LASI(ev(1):ev(2),3)-datos.LKNE(ev(1):ev(2),3)),(datos.LASI(ev(1):ev(2),2)-datos.LKNE(ev(1):ev(2),2)));
+    TetaPiernaI=atan2d((datos.LKNE(ev(1):ev(2),3)-datos.LANK(ev(1):ev(2),3)),(datos.LKNE(ev(1):ev(2),2)-datos.LANK(ev(1):ev(2),2)));
+    TetaPieI=atand((datos.LANK(ev(1):ev(2),3)-datos.LTOE(ev(1):ev(2),3))./(datos.LANK(ev(1):ev(2),2)-datos.LTOE(ev(1):ev(2),2)));
+    
+    TetaCadera=TetaTorsoI-TetaMusloI;
+    TetaRodilla=TetaMusloI-TetaPiernaI;
+    TetaTobillo=TetaPiernaI-TetaPieI;
+end
 
 % Se filtran los ángulos porque se van a calcular las velocidades angulares
-TetaRodilla=filtra(TetaRodillaR,120,6);
-TetaRodilla=filtra(TetaRodillaR,120,6);
+TetaRodillaF=filtra(TetaRodilla,120,6);
+%TetaRodilla=filtra(TetaRodilla,120,6);
 
 j=1;
 dt=1/120;
