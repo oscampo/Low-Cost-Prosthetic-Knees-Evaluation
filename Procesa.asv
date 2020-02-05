@@ -1,3 +1,5 @@
+function [TetaRodillaR, TetaRodillaL,VelRodillaR, VelRodillaL, AcelRodillaR, AcelRodillaL]=Procesa()
+clc
 [filein, pathname] = uigetfile({'*.c3d','C3D file'}, 'C3D data file...');
 file = [pathname filein];
 c3d = ezc3dRead();
@@ -11,19 +13,6 @@ event.frames = fix(event.times*120-c3d.header.points.firstFrame);
 
 prompt = 'Pierna amputada (L/R)? ';
 Leg = input(prompt);
-Leg = upper(Leg);
-evento = [];
-j = 1;
-for i = 1:size(event.frames,2)
-    q = cell2mat(event.context(i));
-    if q(1) == Leg
-        ev(j) = event.frames(i);
-        j = j+1;
-    else
-        0;
-    end
-end
-
 
 for i=1:markers
     label=strrep(c3d.parameters.POINT.LABELS.DATA{i},' ','');
@@ -31,53 +20,80 @@ for i=1:markers
 end
 
 
-if Leg == 'R'
-    
+%if Leg == 'R'
+   [pks,loc] = findpeaks(-datos.RHEE(:,3),'MinPeakDistance',100)
+    prompt = 'Determine Posición de CI y TO en pierna Derecha: ';
+    ev = input(prompt);
     vertR=datos.RASI;
     vertR(ev(1):ev(2),3)=vertR(ev(1):ev(2),3)+1;    
-    TetaTorsoR=atan2d(vertR(:,3)-datos.RASI(:,3), vertR(:,2)-datos.RASI(:,2));
-    TetaMusloR=atan2d((datos.RASI(:,3)-datos.RKNE(:,3)),(datos.RASI(:,2)-datos.RKNE(:,2)));
-    TetaPiernaR=atan2d((datos.RKNE(:,3)-datos.RANK(:,3)),(datos.RKNE(:,2)-datos.RANK(:,2)));
-    TetaPieR=atand((datos.RANK(:,3)-datos.RTOE(:,3))./(datos.RANK(:,2)-datos.RTOE(:,2)));
+    TetaTorsoR=atan2d(vertR(ev(1):ev(2),3)-datos.RASI(ev(1):ev(2),3), vertR(ev(1):ev(2),2)-datos.RASI(ev(1):ev(2),2));
+    TetaMusloR=atan2d((datos.RASI(ev(1):ev(2),3)-datos.RKNE(ev(1):ev(2),3)),(datos.RASI(ev(1):ev(2),2)-datos.RKNE(ev(1):ev(2),2)));
+    TetaPiernaR=atan2d((datos.RKNE(ev(1):ev(2),3)-datos.RANK(ev(1):ev(2),3)),(datos.RKNE(ev(1):ev(2),2)-datos.RANK(ev(1):ev(2),2)));
+    TetaPieR=atand((datos.RANK(ev(1):ev(2),3)-datos.RTOE(ev(1):ev(2),3))./(datos.RANK(ev(1):ev(2),2)-datos.RTOE(ev(1):ev(2),2)));
     
-    TetaCadera=TetaTorsoR-TetaMusloR;
-    TetaRodilla=TetaMusloR-TetaPiernaR;
-    TetaTobillo=TetaPiernaR-TetaPieR;
-elseif Leg == 'L'
-    vertI=datos.LASI;
-    vertI(:,3)=vertI(:,3)+1;
-    TetaTorsoI=atan2d(vertI(:,3)-datos.LASI(:,3), vertI(:,2)-datos.LASI(:,2));
-    TetaMusloI=atan2d((datos.LASI(:,3)-datos.LKNE(:,3)),(datos.LASI(:,2)-datos.LKNE(:,2)));
-    TetaPiernaI=atan2d((datos.LKNE(:,3)-datos.LANK(:,3)),(datos.LKNE(:,2)-datos.LANK(:,2)));
-    TetaPieI=atand((datos.LANK(:,3)-datos.LTOE(:,3))./(datos.LANK(:,2)-datos.LTOE(:,2)));
+    TetaCaderaR=TetaTorsoR-TetaMusloR;
+    TetaRodillaR=TetaMusloR-TetaPiernaR;
+    TetaTobilloR=TetaPiernaR-TetaPieR;
+%elseif Leg == 'L'
+    [pks,loc]=findpeaks(-datos.LHEE(:,3),'MinPeakDistance',100);
+    prompt = 'Determine Posición de CI y TO en pierna Izquierda: ';
+    evL = input(prompt);
+    vertL=datos.LASI;
+    vertL(evL(1):evL(2),3)=vertL(evL(1):evL(2),3)+1;
+    TetaTorsoL=atan2d(vertL(evL(1):evL(2),3)-datos.LASI(evL(1):evL(2),3), vertL(evL(1):evL(2),2)-datos.LASI(evL(1):evL(2),2));
+    TetaMusloL=atan2d((datos.LASI(evL(1):evL(2),3)-datos.LKNE(evL(1):evL(2),3)),(datos.LASI(evL(1):evL(2),2)-datos.LKNE(evL(1):evL(2),2)));
+    TetaPiernaL=atan2d((datos.LKNE(evL(1):evL(2),3)-datos.LANK(evL(1):evL(2),3)),(datos.LKNE(evL(1):evL(2),2)-datos.LANK(evL(1):evL(2),2)));
+    TetaPieL=atand((datos.LANK(evL(1):evL(2),3)-datos.LTOE(evL(1):evL(2),3))./(datos.LANK(evL(1):evL(2),2)-datos.LTOE(evL(1):evL(2),2)));
     
-    TetaCadera=TetaTorsoI-TetaMusloI;
-    TetaRodilla=TetaMusloI-TetaPiernaI;
-    TetaTobillo=TetaPiernaI-TetaPieI;
-end
+    TetaCaderaL=TetaTorsoL-TetaMusloL;
+    TetaRodillaL=TetaMusloL-TetaPiernaL;
+    TetaTobilloL=TetaPiernaL-TetaPieL;
+%end
 
 % Se filtran los ángulos porque se van a calcular las velocidades angulares
-TetaRodillaF=filtra(TetaRodilla,120,6);
-%TetaRodilla=filtra(TetaRodilla,120,6);
+TetaRodillaL=filtra(TetaRodillaL,120,6);
+TetaRodillaR=filtra(TetaRodillaR,120,6);
+
 
 j=1;
 dt=1/120;
-for i=2:length(TetaRodilla)-1
-VelRodilla(j)=(TetaRodilla(i+1)-TetaRodilla(i-1))*pi/180/(2*dt);
+for i=2:length(TetaRodillaR)-1
+VelRodillaR(j)=(TetaRodillaR(i+1)-TetaRodillaR(i-1))*pi/180/(2*dt);
 j=j+1;
 end
 
 j=1;
-for i=2:length(VelRodilla)-1
-AcelRodilla(j)=(VelRodilla(i+1)-VelRodilla(i-1))/(2*dt);
+dt=1/120;
+for i=2:length(TetaRodillaL)-1
+VelRodillaL(j)=(TetaRodillaL(i+1)-TetaRodillaL(i-1))*pi/180/(2*dt);
 j=j+1;
 end
 
-%AcelFil=filtra(AcelRodilla,120,6);
-%VelFil=filtra(VelRodilla,120,6);
+j=1;
+for i=2:length(VelRodillaR)-1
+AcelRodillaR(j)=(VelRodillaR(i+1)-VelRodillaR(i-1))/(2*dt);
+j=j+1;
+end
 
-%Definiendo la frecuencia de corte para los desplazamientos de los
-%datos:
-%fKneeX=fcorte(datos.RTOE(:,1),120,20);
-%fKneeY=fcorte(datos.RTOE(:,2),120,20);
-%fKneeZ=fcorte(datos.RTOE(:,3),120,20);
+j=1;
+for i=2:length(VelRodillaL)-1
+AcelRodillaL(j)=(VelRodillaL(i+1)-VelRodillaL(i-1))/(2*dt);
+j=j+1;
+end
+
+
+TetaRodillaL = acond(TetaRodillaL);
+TetaRodillaR = acond(TetaRodillaR);
+VelRodillaR = acond(VelRodillaR);
+VelRodillaL = acond(VelRodillaL);
+AcelRodillaR = acond(AcelRodillaR);
+AcelRodillaL = acond(AcelRodillaL);
+
+%var=strrep(filein, ' ','_');
+%var=strrep(var, '.c3d','.mat');
+%save(var, 'TetaRodillaR', 'TetaRodillaL', 'VelRodillaR', 'VelRodillaL', 'AcelRodillaR', 'AcelRodillaL');
+%clear all
+end
+function NewSignal = acond(signal)
+  NewSignal = resample(signal, 100, length(signal));
+end
