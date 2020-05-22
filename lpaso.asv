@@ -1,4 +1,4 @@
-function lstep=lpaso(Leg)
+function lstep=lpaso(Leg,)
 % Leg = pierna amputada
 clc
 [filein, pathname] = uigetfile({'*.c3d','C3D file'}, 'C3D data file...');
@@ -16,24 +16,25 @@ event.frames = fix(event.times*120-c3d.header.points.firstFrame);
 % Leg = input(prompt);
 
     for i=1:markers
-    label=strrep(c3d.parameters.POINT.LABELS.DATA{i},' ','');
-    datos.(label)=reshape(c3d.data.points(:,i,:),3, frames)';
+        label=strrep(c3d.parameters.POINT.LABELS.DATA{i},' ','');
+        datos.(label)=reshape(c3d.data.points(:,i,:),3, frames)';
     end
 
 
-    if Leg == 'R' || 'r'
+    if strcmp(Leg,'R')||strcmp(Leg,'r')
+        Leg
         [~,loc] = findpeaks(-datos.RHEE(:,3),'MinPeakDistance',100)
         findpeaks(-datos.RHEE(:,3),'MinPeakDistance',100)
         prompt = 'Determine Posición de CI y TO en pierna Derecha: ';
         ev = input(prompt);
-        lstep = diff(datos.RHEE(ev,2));
+        lstep = mean(diff(datos.RHEE(ev,2)));
     
-    elseif Leg == 'L' || 'l'
+    elseif strcmp(Leg,'L')||strcmp(Leg,'l')
         [~,loc]=findpeaks(-datos.LHEE(:,3),'MinPeakDistance',100)
         findpeaks(-datos.LHEE(:,3),'MinPeakDistance',100)
         prompt = 'Determine Posición de CI y TO en pierna Izquierda: ';
         ev = input(prompt);
-        lstep = diff(datos.LHEE(ev,2));
+        lstep = mean(diff(datos.LHEE(ev,2)));
     end
     close all
 end
