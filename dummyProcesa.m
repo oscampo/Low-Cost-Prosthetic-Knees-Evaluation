@@ -1,4 +1,4 @@
-[TetaR, TetaL,VelR, VelL, AcelR, AcelL]=Procesa('r');
+[TetaR, TetaL,VelR, VelL, AcelR, AcelL]=Procesa('l');
 R3.TetaR=TetaR;
 R3.TetaL=TetaL;
 R3.VelR=VelR;

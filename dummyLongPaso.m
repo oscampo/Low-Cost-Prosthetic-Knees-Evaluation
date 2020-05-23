@@ -7,7 +7,7 @@ long.L1=lpaso(leg,h);
 long.L2=lpaso(leg,h);
 long.L3=lpaso(leg,h);
 
-long.L4=lpaso(leg,h);
+% long.L4=lpaso(leg,h);
 % long.L5=lpaso(leg,h);
 % long.L6=lpaso(leg,h);
 
