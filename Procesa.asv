@@ -56,7 +56,7 @@ if strcmp(Leg,'R')||strcmp(Leg,'r')
     AcelRodillaR = acond(AcelRodillaR);
     TetaRodillaL = [];
     VelRodillaL = [];
-    AcelRodillaL = [];
+    AcelRodillaR = [];
     
 elseif strcmp(Leg,'L')||strcmp(Leg,'l')
     [~,loc]=findpeaks(-datos.LHEE(:,3),'MinPeakDistance',100);
