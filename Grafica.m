@@ -1,24 +1,27 @@
 clear all
+close all
 x=0:101/100:100;
 str1="C:\Users\oscam\OneDrive\Documentos2\GitHub\Proyecto-Helmut\DATOS";
 %str2=[" PRIMERA SESION";" SEGUNDA SESION"; " TERCERA SESION"];
-str2=" PRIMERA SESION";
-str3="\DANIEL MUÑOZ";
+str2=" TERCERA SESION";
+str3="\JULIETH MINA";
+leg="TetaL";
 % FolderPath=[ strcat(str1,str2(1),str3,str2(1));...
 % strcat(str1,str2(2),str3,str2(2));...
 % strcat(str1,str2(3),str3,str2(3))];
 
 FolderPath = strcat(str1,str2(1),str3,str2(1));
 
-cd(FolderPath(n));
+%cd(FolderPath(n));
+cd(FolderPath);
 files = dir('*.mat');
 load(files.name);
-lento=who('L*');
-normal=who('N*');
-rapido=who('R*');
+vel=["L*","N*","R*"];
+for n=1:3
 y=[];
-for n=1:size(lento,1)
-y=[y,eval(lento{n}.Teta
+speed=who(vel(n));
+for j=1:size(speed,1)
+y=[y;eval(strcat(speed{j},".",leg))'];
 end
 
 ymean=mean(y);
@@ -35,5 +38,5 @@ plot(x,ymean,'k-', 'LineWidth', 1)
 ylabel('Grados')
 hold off
 end
-title(s(1),{'Ángulo de Flexión de Rodilla Amputada para P1'; 'a velocidades Baja, Normal y Rápida'});
+title(s(1),{'Ángulo de Flexión de Rodilla Amputada para P7'; 'a velocidades Baja, Normal y Rápida'});
 xlabel(s(3),'Porcentaje Ciclo de Marcha')
