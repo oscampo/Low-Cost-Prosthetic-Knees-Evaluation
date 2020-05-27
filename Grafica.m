@@ -10,11 +10,17 @@ str3="\DANIEL MUÑOZ";
 
 FolderPath = strcat(str1,str2(1),str3,str2(1));
 
-for n=1:3
 cd(FolderPath(n));
 files = dir('*.mat');
 load(files.name);
-y=[L1.TetaL';L2.TetaL';L3.TetaL'];
+lento=who('L*');
+normal=who('N*');
+rapido=who('R*');
+y=[];
+for n=1:size(lento,1)
+y=[y,eval(lento{n}.Teta
+end
+
 ymean=mean(y);
 upperBoundary = max(y);
 lowerBoundary = min(y);
