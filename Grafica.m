@@ -1,7 +1,7 @@
 clear all
 x=0:101/100:100;
 str1="C:\Users\oscam\OneDrive\Documentos2\GitHub\Proyecto-Helmut\DATOS";
-str2=[" PRIMERA SESION";" SEGUNDA SESION"; " TERCER SESION"];
+str2=[" PRIMERA SESION";" SEGUNDA SESION"; " TERCERA SESION"];
 str3="\CAMILO GAMBOA";
 FolderPath=[ strcat(str1,str2(1),str3,str2(1));...
 strcat(str1,str2(2),str3,str2(2));...
