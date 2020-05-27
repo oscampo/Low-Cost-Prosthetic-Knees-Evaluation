@@ -4,11 +4,9 @@ str1="C:\Users\oscam\OneDrive\Documentos2\GitHub\Proyecto-Helmut\DATOS";
 %str2=[" PRIMERA SESION";" SEGUNDA SESION"; " TERCERA SESION"];
 str2=" PRIMERA SESION";
 str3="\DANIEL MUÑOZ";
-% FolderPath=[ strcat(str1,str2(1),str3,str2(1));...
-% strcat(str1,str2(2),str3,str2(2));...
-% strcat(str1,str2(3),str3,str2(3))];
-
-FolderPath = strcat(str1,str2(1),str3,str2(1));
+FolderPath=[ strcat(str1,str2(1),str3,str2(1));...
+strcat(str1,str2(2),str3,str2(2));...
+strcat(str1,str2(3),str3,str2(3))];
 
 for n=1:3
 cd(FolderPath(n));
