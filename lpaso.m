@@ -1,4 +1,4 @@
-function lstep=lpaso(Leg,height)
+function [lstep gaitspeed]=lpaso(Leg,height)
 % Devuelve la longitud del paso normalizada con la altura de la persona
 % Leg = pierna amputada
 % height = altura de la persona
@@ -30,6 +30,7 @@ event.frames = fix(event.times*120-c3d.header.points.firstFrame);
         prompt = 'Determine Posición de CI y TO en pierna Derecha: ';
         ev = input(prompt);
         lstep = mean(diff(datos.RHEE(ev,2)))/height;
+        gaitspeed = mean(diff(datos.RHEE(ev,2)))*120/mean(diff(ev));
     
     elseif strcmp(Leg,'L')||strcmp(Leg,'l')
         [~,loc]=findpeaks(-datos.LHEE(:,3),'MinPeakDistance',100)
@@ -37,6 +38,7 @@ event.frames = fix(event.times*120-c3d.header.points.firstFrame);
         prompt = 'Determine Posición de CI y TO en pierna Izquierda: ';
         ev = input(prompt);
         lstep = mean(diff(datos.LHEE(ev,2)))/height;
+        gaitspeed = mean(diff(datos.RHEE(ev,2)))*120/mean(diff(ev));
     end
     close all
 end

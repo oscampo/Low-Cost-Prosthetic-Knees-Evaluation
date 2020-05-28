@@ -4,8 +4,9 @@ x=0:101/100:100;
 str1="C:\Users\oscam\OneDrive\Documentos2\GitHub\Proyecto-Helmut\DATOS";
 %str2=[" PRIMERA SESION";" SEGUNDA SESION"; " TERCERA SESION"];
 str2=" TERCERA SESION";
-str3="\JULIETH MINA";
-leg="TetaL";
+str3="\SEBASTIAN YACUMAL";
+P="P7";
+leg="TetaR";
 % FolderPath=[ strcat(str1,str2(1),str3,str2(1));...
 % strcat(str1,str2(2),str3,str2(2));...
 % strcat(str1,str2(3),str3,str2(3))];
@@ -38,5 +39,7 @@ plot(x,ymean,'k-', 'LineWidth', 1)
 ylabel('Grados')
 hold off
 end
-title(s(1),{'Ángulo de Flexión de Rodilla Amputada para P7'; 'a velocidades Baja, Normal y Rápida'});
+title(s(1),{strcat('Ángulo de Flexión de Rodilla Amputada para  ',P); 'a velocidades Baja, Normal y Rápida'});
 xlabel(s(3),'Porcentaje Ciclo de Marcha')
+saveas(gcf,eval(strcat("'Rodilla",P,".tif'")))
+clear all

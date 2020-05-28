@@ -1,12 +1,12 @@
-[TetaR, TetaL,VelR, VelL, AcelR, AcelL]=Procesa('l');
-L1.TetaR=TetaR;
-L1.TetaL=TetaL;
-L1.VelR=VelR;
-L1.VelL=VelL;
-L1.AcelR=AcelR;
-L1.AcelL=AcelL;
+[TetaR, TetaL,VelR, VelL, AcelR, AcelL]=Procesa('R');
+N3.TetaR=TetaR;
+N3.TetaL=TetaL;
+N3.VelR=VelR;
+N3.VelL=VelL;
+N3.AcelR=AcelR;
+N3.AcelL=AcelL;
 files = dir('*.mat');
-save(files.name,'L1','-append')
+save(files.name,'N3','-append')
 clear all
 close all
 
