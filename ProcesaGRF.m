@@ -13,7 +13,7 @@ str3=["\MARLON PRADO";...
 weight=[79, 60, 60, 56, 75, 70, 76];
 leg=["l","l","l","l","l","r","r",];
 for n=1:3
-    for p=7:7%1:size(str3,1)
+    for p=2:2%1:size(str3,1)
         FolderPath = strcat(str1,str2,str3(p),str2(1));
         cd(FolderPath);
         files = dir('*.mat');
