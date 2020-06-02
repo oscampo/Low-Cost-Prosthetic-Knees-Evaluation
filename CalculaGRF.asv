@@ -26,17 +26,11 @@ for i =1:totalFiles
     idx=find(event.context==leg);
     
     %if strcmp(event.context{1,1}, leg) && strcmp(event.labels{1,1},'Foot Strike')
-        if size(idx,1)==0
-            idx=[1,1];
-            FP=1;
-        else
-            if idx(1) ~= 1
-                FP=7;%ForcePlatform id
-            else
-                FP=1; %ForcePlatform id
-            end
-        end
         rango = event.frames(idx(1)):event.frames(idx(2));
+        if idx(i) ~= 1
+            FP=7;
+        else
+            FP=1; 
 %     elseif strcmp(event.context{2,1}, leg) && strcmp(event.labels{2,1},'Foot Strike')
 %         rango = event.frames(2):event.frames(3);
 %     elseif strcmp(event.context{3,1}, leg) && strcmp(event.labels{3,1},'Foot Strike')
@@ -47,11 +41,18 @@ for i =1:totalFiles
 %     end
     grf=sqrt(c3d.data.analogs(:,FP).^2+c3d.data.analogs(:,FP+1).^2+c3d.data.analogs(:,FP+2).^2);
     rango=find(grf>10);
-     if size(rango,1)==0
-            rango=1;
-     end
+    if size(rango,2)==0
+        continue
+    else
+        "ok"
+    end
     grf=grf(rango);
-
+%     if event.frames(1)>event.frames(2)
+%         rango = event.frames(2):event.frames(3);
+%     else
+%         rango = event.frames(1):event.frames(2);
+%     end
+    %time = (rango-rango(1))./rate;
     time = (1:size(grf,1))./rate;
     F{i}=[time',grf./(w*9.81)];
     %[pks,~] = findpeaks(F{i},'MinPeakHeight',500,'MinPeakDistance',80);
