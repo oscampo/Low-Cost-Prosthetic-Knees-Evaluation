@@ -1,5 +1,5 @@
-leg='r'
-h=1900 ; 
+leg='l'
+h=1730 ; 
 
 disp('Velocidad lenta !') 
 [long.L1 long.l1]=lpaso(leg,h);

@@ -20,7 +20,7 @@ k=1;
 for n=1:3 
     %k=1;
     y=[];
-    for p=7:7%1:size(str3,1)
+    for p=5:5%1:size(str3,1)
         FolderPath = strcat(str1,str2,str3(p),str2(1));
         cd(FolderPath);
         files = dir('*.mat');
@@ -43,7 +43,7 @@ for n=1:3
     end
 end
 cd("C:\Users\oscam\OneDrive\Documentos2\GitHub\Proyecto-Helmut");
-dat3=dat;
-save('datos7.mat', 'dat3','-append')
+dat1=dat;
+save('datos5.mat', 'dat1','-append')
 clear all
 clc
