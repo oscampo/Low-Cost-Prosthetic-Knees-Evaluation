@@ -13,22 +13,27 @@
 % save(files2.name,'pks','-append')
 
 figure;
-subplot(3,1,1);
+%subplot(3,1,1);
 boxplot(GRF_L(:,2),pL)
 grid on
 title({"Fuerza de Reacción Normalizada medida a Velocidad Baja"; "con las Rodillas Propia (1), ATK-PA-01 (2) y 3P26 (3) para cada Paciente"});
 xlabel('Pacientes')
+saveas(gcf,'GRF_Lenta.tif')
 
-subplot(3,1,2);
-boxplot(GRF_N(:,2),pN)
+figure;
+%subplot(3,1,2);
+boxplot(GRF_N(:,2),pN,'Notch','on','Widths',0.3,'Whisker',1.5)
 grid on
 title({"Fuerza de Reacción Normalizada medida a Velocidad Normal"; "con las Rodillas Propia (1), ATK-PA-01 (2) y 3P26 (3) para cada Paciente"});
 xlabel('Pacientes')
+saveas(gcf,'GRF_Normal.tif')
 
-subplot(3,1,3);
+figure;
+%subplot(3,1,3);
 boxplot(GRF_R(:,2),pR)
 grid on
 title({"Fuerza de Reacción Normalizada medida a Velocidad Rápida"; "con las Rodillas Propia (1), ATK-PA-01 (2) y 3P26 (3) para cada Paciente"});
 xlabel('Pacientes')
+saveas(gcf,'GRF_Rapida.tif')
 
 %saveas(gcf,'GRF_Total.tif')

@@ -18,6 +18,7 @@ spd=[];
 dat=[];
 k=1;
 rodilla=["_1","_2", "_3"];
+Lpierna=[976.4 927.4 871.975 877.303 903.505 1023.07 974.155];
 lenta=[];
 normal=[];
 rapida=[];
@@ -45,7 +46,7 @@ for n=1:3
                 pN=cat(1,pN,[strcat("p",num2str(p),rodilla(sesion))]);
             elseif contains(fldn{j},"r")
                 y=eval(strcat('long.',fldn{j}));
-                rapida=cat(1,rapida,y/1000);
+                rapida=cat(1,rapida,y/Lpierna(p));
                 pR=cat(1,pR,[strcat("p",num2str(p),rodilla(sesion))]);
             else
                  y;
