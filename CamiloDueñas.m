@@ -1,0 +1,1 @@
+tiempo=datos(:,1)-datos(1,1);
