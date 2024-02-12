@@ -1,4 +1,4 @@
-function [TetaRodillaR, TetaRodillaL,VelRodillaR, VelRodillaL, AcelRodillaR, AcelRodillaL]=Procesa()
+function [TetaRodillaR, TetaRodillaL,VelRodillaR, VelRodillaL, AcelRodillaR, AcelRodillaL]=Procesa(Leg)
 clc
 [filein, pathname] = uigetfile({'*.c3d','C3D file'}, 'C3D data file...');
 file = [pathname filein];
@@ -11,8 +11,8 @@ event.context = c3d.parameters.EVENT.CONTEXTS.DATA;
 event.times = c3d.parameters.EVENT.TIMES.DATA(2,:);
 event.frames = fix(event.times*120-c3d.header.points.firstFrame);
 
-prompt = 'Pierna amputada (L/R)? ';
-Leg = input(prompt);
+%prompt = 'Pierna amputada (L/R)? ';
+%Leg = input(prompt);
 
 for i=1:markers
     label=strrep(c3d.parameters.POINT.LABELS.DATA{i},' ','');
@@ -20,8 +20,9 @@ for i=1:markers
 end
 
 
-%if Leg == 'R'
-   [~,loc] = findpeaks(-datos.RHEE(:,3),'MinPeakDistance',100)
+if strcmp(Leg,'R')||strcmp(Leg,'r')
+   [~,loc] = findpeaks(-datos.RHEE(:,3),'MinPeakDistance',100);
+   loc
    findpeaks(-datos.RHEE(:,3),'MinPeakDistance',100)
     prompt = 'Determine Posición de CI y TO en pierna Derecha: ';
     ev = input(prompt);
@@ -35,8 +36,31 @@ end
     TetaCaderaR=TetaTorsoR-TetaMusloR;
     TetaRodillaR=TetaMusloR-TetaPiernaR;
     TetaTobilloR=TetaPiernaR-TetaPieR;
-%elseif Leg == 'L'
-    [~,loc]=findpeaks(-datos.LHEE(:,3),'MinPeakDistance',100)
+    % Se filtran los ángulos porque se van a calcular las velocidades angulares
+    TetaRodillaR=filtra(TetaRodillaR,120,6);
+    
+    j=1;
+    dt=1/120;
+    for i=2:length(TetaRodillaR)-1
+        VelRodillaR(j)=(TetaRodillaR(i+1)-TetaRodillaR(i-1))*pi/180/(2*dt);
+        j=j+1;
+    end
+        j=1;
+    for i=2:length(VelRodillaR)-1
+        AcelRodillaR(j)=(VelRodillaR(i+1)-VelRodillaR(i-1))/(2*dt);
+        j=j+1;
+    end
+    
+    TetaRodillaR = acond(TetaRodillaR);
+    VelRodillaR = acond(VelRodillaR);
+    AcelRodillaR = acond(AcelRodillaR);
+    TetaRodillaL = [];
+    VelRodillaL = [];
+    AcelRodillaL = [];
+    
+elseif strcmp(Leg,'L')||strcmp(Leg,'l')
+    [~,loc]=findpeaks(-datos.LHEE(:,3),'MinPeakDistance',100);
+    loc
     findpeaks(-datos.LHEE(:,3),'MinPeakDistance',100)
     prompt = 'Determine Posición de CI y TO en pierna Izquierda: ';
     evL = input(prompt);
@@ -50,51 +74,29 @@ end
     TetaCaderaL=TetaTorsoL-TetaMusloL;
     TetaRodillaL=TetaMusloL-TetaPiernaL;
     TetaTobilloL=TetaPiernaL-TetaPieL;
-%end
+    % Se filtran los ángulos porque se van a calcular las velocidades angulares
+    TetaRodillaL=filtra(TetaRodillaL,120,6);
+    j=1;
+    dt=1/120;
+    for i=2:length(TetaRodillaL)-1
+        VelRodillaL(j)=(TetaRodillaL(i+1)-TetaRodillaL(i-1))*pi/180/(2*dt);
+        j=j+1;
+    end
 
-% Se filtran los ángulos porque se van a calcular las velocidades angulares
-TetaRodillaL=filtra(TetaRodillaL,120,6);
-TetaRodillaR=filtra(TetaRodillaR,120,6);
+    j=1;
+    for i=2:length(VelRodillaL)-1
+        AcelRodillaL(j)=(VelRodillaL(i+1)-VelRodillaL(i-1))/(2*dt);
+        j=j+1;
+    end
 
-
-j=1;
-dt=1/120;
-for i=2:length(TetaRodillaR)-1
-VelRodillaR(j)=(TetaRodillaR(i+1)-TetaRodillaR(i-1))*pi/180/(2*dt);
-j=j+1;
+    TetaRodillaL = acond(TetaRodillaL);
+    VelRodillaL = acond(VelRodillaL);
+    AcelRodillaL = acond(AcelRodillaL);
+    TetaRodillaR = [];
+    VelRodillaR = [];
+    AcelRodillaR = [];
 end
 
-j=1;
-dt=1/120;
-for i=2:length(TetaRodillaL)-1
-VelRodillaL(j)=(TetaRodillaL(i+1)-TetaRodillaL(i-1))*pi/180/(2*dt);
-j=j+1;
-end
-
-j=1;
-for i=2:length(VelRodillaR)-1
-AcelRodillaR(j)=(VelRodillaR(i+1)-VelRodillaR(i-1))/(2*dt);
-j=j+1;
-end
-
-j=1;
-for i=2:length(VelRodillaL)-1
-AcelRodillaL(j)=(VelRodillaL(i+1)-VelRodillaL(i-1))/(2*dt);
-j=j+1;
-end
-
-
-TetaRodillaL = acond(TetaRodillaL);
-TetaRodillaR = acond(TetaRodillaR);
-VelRodillaR = acond(VelRodillaR);
-VelRodillaL = acond(VelRodillaL);
-AcelRodillaR = acond(AcelRodillaR);
-AcelRodillaL = acond(AcelRodillaL);
-
-%var=strrep(filein, ' ','_');
-%var=strrep(var, '.c3d','.mat');
-%save(var, 'TetaRodillaR', 'TetaRodillaL', 'VelRodillaR', 'VelRodillaL', 'AcelRodillaR', 'AcelRodillaL');
-%clear all
 end
 function NewSignal = acond(signal)
   NewSignal = resample(signal, 100, length(signal));
