@@ -1,0 +1,15 @@
+Captions
+Figure 1. PLUS-M, T-score  
+Figure 2. Time spent during the 20mWT. 
+Figure 3. Number of steps during the 20mWT.
+Figure 4. Walking speed during the 2MWT 
+Figure 5. PCI during the 2MWT 
+Figure 6. Time spent during the L-TEST 
+
+Titles:
+Figure 1.tif : Plus-M
+Figure 2.tif : 20mWT (fast pace)
+Figure 3.tif : 20mWT (fast pace)
+Figure 4.tif : 2MWT
+Figure 5.tif : PCI
+Figure 6.tif : L-Test

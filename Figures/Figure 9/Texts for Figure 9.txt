@@ -1,0 +1,17 @@
+Caption:
+Figure 9. Knee flexion angle for 3P26 knee. 
+
+Titles:
+3P26-P1.tif : 3P26 prosthetic knee flexion angle for P1 at low, normal, and fast speeds.
+
+3P26-P2.tif : 3P26 prosthetic knee flexion angle for P2 at low, normal, and fast speeds.
+
+3P26-P3.tif : 3P26 prosthetic knee flexion angle for P3 at low, normal, and fast speeds.
+
+3P26-P4.tif : 3P26 prosthetic knee flexion angle for P4 at low, normal, and fast speeds.
+
+3P26-P5.tif : 3P26 prosthetic knee flexion angle for P5 at low, normal, and fast speeds.
+
+3P26-P6.tif : 3P26 prosthetic knee flexion angle for P6 at low, normal, and fast speeds.
+
+3P26-P7.tif : 3P26 prosthetic knee flexion angle for P7 at low, normal, and fast speeds.

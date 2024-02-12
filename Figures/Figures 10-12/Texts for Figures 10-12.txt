@@ -1,0 +1,13 @@
+Captions:
+Figure 10.  Normalized slow walking speed (p=0.05) for Conventional (1), ATK-PA-01 (2) and 3P26 (3) knees
+
+Figure 11.  Normalized medium walking speed (p=0.05) for Conventional (1), ATK-PA-01 (2), and 3P26 (3) knees.
+
+Figure 12.  Normalized fast walking speed (p=0.05) for Conventional (1), ATK-PA-01 (2) and 3P26 (3) knees.
+
+Titles:
+Figure 10.tif : Normalized Slow Walking Speed obtained with Conventional (1), ATK-PA-01(2) and 3P26 knees for each Participant
+
+Figure 11.tif : Normalized Normal Walking Speed obtained with Conventional (1), ATK-PA-01(2) and 3P26 knees for each Participant
+
+Figure 12.tif :  Normalized Fast Walking Speed obtained with Conventional (1), ATK-PA-01(2) and 3P26 knees for each Participant

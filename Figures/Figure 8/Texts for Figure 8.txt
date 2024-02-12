@@ -1,0 +1,17 @@
+Caption:
+Figure 8. Knee flexion angle for ATK-PA-01 knee.
+
+Titles:
+ATKPA01-P1.tif : ATK-PA-01 prosthetic knee flexion angle for P1 at low, normal, and fast speeds.
+
+ATKPA01-P2.tif : ATK-PA-01 prosthetic knee flexion angle for P2 at low, normal, and fast speeds.
+
+ATKPA01-P3.tif : ATK-PA-01 prosthetic knee flexion angle for P3 at low, normal, and fast speeds.
+
+ATKPA01-P4.tif : ATK-PA-01 prosthetic knee flexion angle for P4 at low, normal, and fast speeds.
+
+ATKPA01-P5.tif : ATK-PA-01 prosthetic knee flexion angle for P5 at low, normal, and fast speeds.
+
+ATKPA01-P6.tif : ATK-PA-01 prosthetic knee flexion angle for P6 at low, normal, and fast speeds.
+
+ATKPA01-P7.tif : ATK-PA-01 prosthetic knee flexion angle for P7 at low, normal, and fast speeds.

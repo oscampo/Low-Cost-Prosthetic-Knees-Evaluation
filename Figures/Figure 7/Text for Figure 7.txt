@@ -1,0 +1,17 @@
+Caption:
+Figure 7. Knee flexion angle for Conventional knee. 
+
+Titles:
+Picture1.tif : conventional prosthetic knee flexion angle for P1 at low, normal and fast speeds
+
+Picture2.tif : conventional prosthetic knee flexion angle for P2 at low, normal and fast speeds
+
+Picture3.tif : conventional prosthetic knee flexion angle for P3 at low, normal and fast speeds
+
+Picture4.tif : conventional prosthetic knee flexion angle for P4 at low, normal and fast speeds
+
+Picture5.tif : conventional prosthetic knee flexion angle for P5 at low, normal and fast speeds
+
+Picture6.tif :conventional prosthetic knee flexion angle for P6 at low, normal and fast speeds
+
+Picture7.tif : conventional prosthetic knee flexion angle for P7 at low, normal and fast speeds

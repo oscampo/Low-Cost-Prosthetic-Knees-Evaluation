@@ -1,0 +1,13 @@
+Captions
+Figure 13. Maximum normalized GRF at slow walking speed (p=0.05) for Conventional (1), ATK-PA-01 (2), and 3P26 (3) knees. 
+
+Figure 14. Maximum normalized GRF at medium walking speed (p=0.05) for Conventional (1), ATK-PA-01 (2) and 3P26 (3) knees.
+
+Figure 15. Maximum normalized GRF at fast walking speed (p=0.05) for Conventional (1), ATK-PA-01 (2) and 3P26 (3) knees.
+
+Titles
+Figure 13.tif : GRF Normalized using Conventional (1), ATK-PA-01(2) and 3P26 (3) knees, measured at Slow Walking Speed for each Participant.
+
+Figure 14.tif : GRF Normalized using Conventional (1), ATK-PA-01(2) and 3P26 (3) knees, measured at Normal Walking Speed for each Participant.
+
+Figure 15.tif : GRF Normalized using Conventional (1), ATK-PA-01(2) and 3P26 (3) knees, measured at Fast Walking Speed for each Participant.
